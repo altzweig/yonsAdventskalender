@@ -1,0 +1,375 @@
+/* ===== Grundlegende Styles ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    min-height: 100vh;
+    color: #e8e8e8;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ===== Schneeflocken Animation ===== */
+.snowflakes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.snowflake {
+    position: absolute;
+    top: -50px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.5rem;
+    animation: fall linear infinite;
+}
+
+.snowflake:nth-child(1) { left: 5%; animation-duration: 10s; animation-delay: 0s; font-size: 1.2rem; }
+.snowflake:nth-child(2) { left: 15%; animation-duration: 12s; animation-delay: 2s; font-size: 1.8rem; }
+.snowflake:nth-child(3) { left: 25%; animation-duration: 8s; animation-delay: 4s; font-size: 1rem; }
+.snowflake:nth-child(4) { left: 35%; animation-duration: 14s; animation-delay: 1s; font-size: 1.5rem; }
+.snowflake:nth-child(5) { left: 50%; animation-duration: 9s; animation-delay: 3s; font-size: 2rem; }
+.snowflake:nth-child(6) { left: 60%; animation-duration: 11s; animation-delay: 5s; font-size: 1.3rem; }
+.snowflake:nth-child(7) { left: 70%; animation-duration: 13s; animation-delay: 0.5s; font-size: 1.7rem; }
+.snowflake:nth-child(8) { left: 80%; animation-duration: 10s; animation-delay: 2.5s; font-size: 1.1rem; }
+.snowflake:nth-child(9) { left: 90%; animation-duration: 15s; animation-delay: 4.5s; font-size: 1.4rem; }
+.snowflake:nth-child(10) { left: 95%; animation-duration: 7s; animation-delay: 1.5s; font-size: 1.6rem; }
+
+@keyframes fall {
+    0% {
+        transform: translateY(-50px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0.3;
+    }
+}
+
+/* ===== Header ===== */
+header {
+    text-align: center;
+    padding: 2rem 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #ffd700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #a8d8ea;
+    opacity: 0.9;
+}
+
+/* ===== Kalender Grid ===== */
+main {
+    padding: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+}
+
+/* ===== Türchen Styles ===== */
+.door {
+    aspect-ratio: 1;
+    background: linear-gradient(145deg, #c41e3a 0%, #8b0000 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffd700;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.3),
+        inset 0 2px 4px rgba(255, 255, 255, 0.2);
+    border: 3px solid #8b4513;
+    overflow: hidden;
+}
+
+.door::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border: 2px dashed rgba(255, 215, 0, 0.4);
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+.door::after {
+    content: '';
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: #ffd700;
+    border-radius: 50%;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.door:hover:not(.locked) {
+    transform: scale(1.08) rotate(-2deg);
+    box-shadow: 
+        0 8px 20px rgba(255, 215, 0, 0.4),
+        inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.door:active:not(.locked) {
+    transform: scale(0.98);
+}
+
+/* Gesperrte Türchen */
+.door.locked {
+    background: linear-gradient(145deg, #4a4a4a 0%, #2a2a2a 100%);
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.6;
+    border-color: #333;
+}
+
+.door.locked::after {
+    background: #555;
+}
+
+.door.locked::before {
+    border-color: rgba(100, 100, 100, 0.3);
+}
+
+/* Geöffnete Türchen */
+.door.opened {
+    background: linear-gradient(145deg, #228b22 0%, #006400 100%);
+    border-color: #2e7d32;
+}
+
+.door.opened::after {
+    background: #90ee90;
+}
+
+/* ===== Modal Styles ===== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    padding: 1rem;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background: linear-gradient(145deg, #1e3a5f 0%, #0d2137 100%);
+    border-radius: 20px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: scale(0.7) translateY(-50px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 
+        0 20px 60px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(255, 215, 0, 0.2);
+    border: 3px solid rgba(255, 215, 0, 0.3);
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1) translateY(0);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background: linear-gradient(90deg, #c41e3a, #8b0000);
+    border-radius: 17px 17px 0 0;
+}
+
+.door-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffd700;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    transition: transform 0.2s ease;
+}
+
+.close-btn:hover {
+    transform: rotate(90deg);
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-body h2 {
+    color: #ffd700;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.modal-body p {
+    color: #e8e8e8;
+    line-height: 1.8;
+    font-size: 1.1rem;
+    text-align: center;
+    white-space: pre-line;
+}
+
+.modal-footer {
+    padding: 1.5rem;
+    text-align: center;
+    border-top: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.btn-close {
+    background: linear-gradient(145deg, #228b22, #006400);
+    color: #fff;
+    border: none;
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(34, 139, 34, 0.4);
+}
+
+.btn-close:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(34, 139, 34, 0.6);
+}
+
+/* ===== Footer ===== */
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: #a8d8ea;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 900px) {
+    .calendar-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .calendar-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.6rem;
+    }
+    
+    header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .door {
+        font-size: 1.3rem;
+        border-radius: 8px;
+    }
+    
+    .door::after {
+        width: 8px;
+        height: 8px;
+        right: 8px;
+    }
+    
+    .modal-body h2 {
+        font-size: 1.2rem;
+    }
+    
+    .modal-body p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .calendar-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .door {
+        font-size: 1.1rem;
+    }
+}
+
+/* ===== Animationen für Türchen-Öffnung ===== */
+@keyframes doorOpen {
+    0% {
+        transform: perspective(500px) rotateY(0deg);
+    }
+    100% {
+        transform: perspective(500px) rotateY(-30deg);
+    }
+}
+
+.door.opening {
+    animation: doorOpen 0.3s ease-out forwards;
+}
+
+/* ===== Glitzer-Effekt für freigeschaltete Türchen ===== */
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.door:not(.locked)::before {
+    animation: sparkle 2s infinite;
+}

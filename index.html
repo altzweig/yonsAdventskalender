@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adventskalender 2025</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="snowflakes" aria-hidden="true">
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❄</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❄</div>
+    </div>
+
+    <header>
+        <h1>🎄 Adventskalender 2025 🎄</h1>
+        <p class="subtitle">Öffne jeden Tag ein Türchen und löse das Rätsel!</p>
+    </header>
+
+    <main>
+        <div class="calendar-grid" id="calendar">
+            <!-- Türchen werden per JavaScript generiert -->
+        </div>
+    </main>
+
+    <!-- Modal für Rätsel -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="door-number" id="modalDoorNumber">Türchen 1</span>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h2 id="riddleTitle">Rätseltitel</h2>
+                <p id="riddleText">Rätseltext hier...</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-close" id="closeModalBtn">Schließen</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>🌟 Frohe Adventszeit! 🌟</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
